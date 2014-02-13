@@ -31,8 +31,18 @@ function addProjectDetails(e) {
 	var getURL = "/project/" + String(idNumber);
 	console.log(getURL);
 	$.get(getURL, showProject);	
+	
+	var panoramio = "http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=20&minx=-180&miny=-90&maxx=180&maxy=90&size=medium&mapfilter=true"
+	$.get(panoramio, showPicture, 'jsonp');
 }
 
+function showPicture(result) {
+	console.log(result);
+	var image = result["photos"][1]["photo_file_url"];
+	console.log(result["photos"][1]["photo_url"]);
+
+	$('.jumbotron').css('background', 'url(' + image + ') no-repeat center');
+}
 /*
  * Make an AJAX call to retrieve a color palette for the site
  * and apply it
